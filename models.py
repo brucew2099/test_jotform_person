@@ -2,6 +2,7 @@
 Imports
 """
 
+import json
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, String
@@ -57,18 +58,21 @@ class Person(Base):
             {self.form_id}, {self.submission_id}, \
             {self.form_title}'
 
-    def parse_patient_data(self, req):
+    def parse_patient_data(self, form_data):
         """
         Parse patient data from request
         :param req:
         :return:
         """
-        self.id = get_next_id(database, Person)
-        self.first_name = req['q18_patientName']['first']
-        self.last_name = req['q18_patientName']['last']
-        self.age = req['q74_age']
-        self.form_id
-        self.submission_id
-        self.form_title
+        self.form_id = form_data['formId']
+        self.form_title = form_data['formTitle']
+        self.submission_id = form_data['submissionId']
 
-        add_entity(database, Person)
+        if form_data["rawRequest"]:
+            req = json.loads(form_data["rawRequest"])
+            self.id = get_next_id(database, Person)
+            self.first_name = req['q3_name']['first']
+            self.last_name = req['q3_name']['last']
+            self.age = req['q4_age']
+
+            add_entity(database, Person)

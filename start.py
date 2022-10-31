@@ -1,7 +1,7 @@
 """
 Imports
 """
-import json
+
 import os
 from flask import render_template, request
 from app import create_app
@@ -24,14 +24,8 @@ def process_jotform():
     """
     form_data = request.form.to_dict()
 
-    print(f'form_data = {form_data}')
-
-    person = Person()
-
     if form_data["rawRequest"]:
-        req = json.loads(form_data["rawRequest"])
-        print(f'req = {req}')
-        # person.parse_patient_data(req)
+        Person().parse_patient_data(form_data)
 
     return "ok", 200
 
