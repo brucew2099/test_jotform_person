@@ -64,9 +64,9 @@ class Person(Base):
         :param req:
         :return:
         """
-        self.form_id = form_data['formId']
+        self.form_id = form_data['formID']
         self.form_title = form_data['formTitle']
-        self.submission_id = form_data['submissionId']
+        self.submission_id = form_data['submissionID']
 
         if form_data["rawRequest"]:
             req = json.loads(form_data["rawRequest"])
