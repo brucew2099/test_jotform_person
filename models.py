@@ -70,7 +70,8 @@ class Person(Base):
 
         if form_data["rawRequest"]:
             req = json.loads(form_data["rawRequest"])
-            self.id = get_next_id(database, Person)
+            #self.id = get_next_id(database, Person)
+            self.id=1
             self.first_name = req['q3_name']['first']
             self.last_name = req['q3_name']['last']
             self.age = req['q4_age']
