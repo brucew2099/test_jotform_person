@@ -31,7 +31,7 @@ def get_next_id(database, entity) -> int:
     this_id = 0
 
     try:
-        max_id = session.query(func.max(model.id)).one_or_none()
+        max_id = session.query(func.max(model.Id)).one_or_none()
         this_id = max_id[0] + 1
     except BaseException as ex:
         traceback = sys.exc_info()

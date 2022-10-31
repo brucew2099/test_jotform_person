@@ -1,0 +1,16 @@
+2022-10-31 19:20:17,446 INFO:             LOGGING LEVEL: INFO [in c:\Users\alank\source\repos\test_jotform_person\app.py:22]
+2022-10-31 19:23:59,340 ERROR:             Exception on /process [GET] [in C:\Users\alank\source\repos\test_jotform_person\.env\lib\site-packages\flask\app.py:1741]
+Traceback (most recent call last):
+  File "C:\Users\alank\source\repos\test_jotform_person\.env\lib\site-packages\flask\app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\alank\source\repos\test_jotform_person\.env\lib\site-packages\flask\app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\alank\source\repos\test_jotform_person\.env\lib\site-packages\flask_cors\extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\alank\source\repos\test_jotform_person\.env\lib\site-packages\flask\app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\alank\source\repos\test_jotform_person\.env\lib\site-packages\flask\app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "c:\Users\alank\source\repos\test_jotform_person\start.py", line 27, in process_jotform
+    if form_data["rawRequest"]:
+KeyError: 'rawRequest'
