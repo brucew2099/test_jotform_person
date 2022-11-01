@@ -76,4 +76,6 @@ class Person(Base):
             self.last_name = req['q3_name']['last']
             self.age = req['q4_age']
 
+            print(self)
+
             add_entity(database, self)
