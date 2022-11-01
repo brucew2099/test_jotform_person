@@ -4,15 +4,10 @@ Imports
 
 import json
 import os
-from os.path import abspath, dirname, join
-from dotenv import load_dotenv
 import pyodbc
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
-
-basedir = abspath(dirname(__file__))
-load_dotenv(join(basedir, '.env-local'))
 
 DRIVER = os.environ.get('SQLSERVER.DRIVER')
 USER = os.environ.get('SQLSERVER.USER')
