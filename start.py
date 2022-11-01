@@ -37,7 +37,8 @@ def process_jotform():
         req = json.loads(form_data["rawRequest"])
 
         conn = pyodbc.connect(f'Driver={DRIVER}; Server={HOST}; \
-            Database={DB}; UID={USER}; PWD={PASSWD}; TrustedConnection=True')
+            Database={DB}; UID={USER}; PWD={PASSWD}; \
+            Encrypt=yes; TrustServerCertificate=no; Connection Timeout=30;')
 
         cursor = conn.cursor()
 
