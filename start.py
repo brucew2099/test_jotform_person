@@ -10,7 +10,7 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-logging.basicConfig(fileName='record.log', level=logging.DEBUG, format=f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
+logging.basicConfig(filename='record.log', level=logging.DEBUG, format=f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
  
 @app.route('/blogs')
 def blog():
