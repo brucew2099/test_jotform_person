@@ -18,6 +18,7 @@ USER = os.environ.get('SQLSERVER.USER')
 PASSWD = os.environ.get('SQLSERVER.PASSWD')
 HOST = os.environ.get('SQLSERVER.HOST')
 DB = os.environ.get('SQLSERVER.DB')
+PORT = os.environ.get('SQLSERVER.PORT')
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -39,7 +40,7 @@ def process_jotform():
 
         try:
             conn = pyodbc.connect(f'Driver={DRIVER}; Server={HOST}; \
-                Database={DB}; UID={USER}; PWD={PASSWD}; \
+                Port={PORT}; Database={DB}; UID={USER}; PWD={PASSWD}; \
                 Encrypt=yes; TrustServerCertificate=no; Connection Timeout=30;')
         except Exception as ex:
             app.logging.error(f'Database not connecting. Exception: {ex}')
