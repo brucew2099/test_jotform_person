@@ -3,11 +3,23 @@ Imports
 """
 
 import json
+import logging
 import os
 import pyodbc
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
+
+logging.basicConfig(fileName='record.log', level=logging.DEBUG, format=f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
+ 
+@app.route('/blogs')
+def blog():
+    app.logger.info('Info level log')
+    app.logger.warning('Warning level log')
+    return f"Welcome to the Blog"
+ 
+app.run(host='localhost', debug=True)
+
 
 DRIVER = os.environ.get('SQLSERVER.DRIVER')
 USER = os.environ.get('SQLSERVER.USER')
@@ -31,22 +43,22 @@ def process_jotform():
     if form_data["rawRequest"]:
         req = json.loads(form_data["rawRequest"])
 
-        conn = pyodbc.connect(f'Driver={DRIVER}; Server={HOST}; \
-            Database={DB}; UID={USER}; PWD={PASSWD}; \
-            Encrypt=yes; TrustServerCertificate=no; Connection Timeout=30;')
+        app.logger.debug(f'DRIVER: {DRIVER}, SERVER: {HOST}, DB: {DB}, UID: {USER}')
+
+        try:
+            conn = pyodbc.connect(f'Driver={DRIVER}; Server={HOST}; \
+                Database={DB}; UID={USER}; PWD={PASSWD}; \
+                Encrypt=yes; TrustServerCertificate=no; Connection Timeout=30;')
+        except Exception as ex:
+            app.logging.error(f'Database not connecting. Exception: {ex}')
 
         cursor = conn.cursor()
 
         next_id = 1
 
-        try:
-            cursor.execute("SELECT IDENT_CURRENT('Persons') + 1")
-            next_id = 1 if cursor.fetchone()[0] is None else cursor.fetchone()[0]
-        except Exception as exception:
-            print(exception)
-        finally:
-            print('There is no record in the table')
-            print(f'next_id: {next_id}')
+        cursor.execute("SELECT IDENT_CURRENT('Persons') + 1")
+        next_id = 1 if cursor.fetchone()[0] is None else cursor.fetchone()[0]
+        app.log.debug(f'next_id: {next_id}')
 
         cursor.execute("INSERT INTO Persons \
             (Id, FirstName, LastName, Age, FormId, SubmissionId, FormTitle) \
@@ -69,7 +81,7 @@ def process_jotform():
 
         cursor.execute('SELECT * FROM Persons')
         for i in cursor:
-            print(i)
+            app.logging.debug(i)
 
         cursor.close()
         conn.close()
@@ -77,4 +89,4 @@ def process_jotform():
     return "ok", 200
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
