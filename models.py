@@ -41,7 +41,14 @@ class Person(db.Model):
     form_title = Column(String(100))
 
     def __str__(self):
-        return f'{self.last_name}, {self.first_name}'
+        return f'''
+            Last Name: {self.last_name},
+            First Name: {self.first_name},
+            Age: {self.age},
+            Form ID: {self.form_id},
+            Submission ID: {self.submission_id},
+            Form Title: {self.form_title}
+        '''
 
     def person_to_db(self):
         session.add(self)

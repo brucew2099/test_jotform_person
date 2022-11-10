@@ -61,6 +61,8 @@ def process():
         person.submission_id = form_data['submissionID']
         person.form_title = form_data['formTitle']
         person.add_person_to_db()
+
+        print(person)
         
     return render_template('addperson.html', person=person)
 
