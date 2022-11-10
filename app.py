@@ -49,6 +49,7 @@ def process():
     """
     This is the process JotForm route
     """
+    print('Data is being processed...')
     form_data = request.form.to_dict()
     if form_data["rawRequest"]:
         req = json.loads(form_data["rawRequest"])

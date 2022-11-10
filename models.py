@@ -40,7 +40,7 @@ class Person(db.Model):
     submission_id = Column(String(50))
     form_title = Column(String(100))
 
-    def __str__(self):
+    def __repl__(self):
         return f'''
             Last Name: {self.last_name},
             First Name: {self.first_name},
