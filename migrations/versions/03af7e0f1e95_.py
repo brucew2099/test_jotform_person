@@ -8,7 +8,8 @@ Create Date: 2022-11-10 09:43:48.727343
 from alembic import op
 import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
-from sqlalchemy.engine.reflection import Inspector
+from sqlalchemy import engine_from_config
+from sqlalchemy.engine import reflection
 
 # revision identifiers, used by Alembic.
 revision = '03af7e0f1e95'
