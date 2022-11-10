@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+    <h1>Intake for {{person.form_title}}</h1>
+    <h2>Form ID: {{person.form_id}} is added to database</h2>
+    <div>
+        <div>First Name: {{person.first_name}}</div>
+        <div>Last Name: {{person.last_name}}</div>
+        <div>Age: {{person.age}}</div>
+        <div>Submission ID: {{person.submission_id}}</div>
+    </div>
+    <div style="margin-top:20px;">
+        <a href="{{ url_for('index') }}">Return to Home</a>
+    </div>
+</body>
+</html>
